@@ -1,0 +1,7 @@
+__pycache__/
+.vscode/
+.git/
+out/
+samples/
+suoni/
+.DS_Store
