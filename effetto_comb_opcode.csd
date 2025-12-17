@@ -9,7 +9,7 @@ ksmps = 64
 nchnls = 2
 0dbfs = 1
 
-opcode comb_filter_envfollower, a, aii
+opcode comb_filter, a, aii
     aSigIn, iBaseVal, iMaxVal xin
 
 aDel init 0
