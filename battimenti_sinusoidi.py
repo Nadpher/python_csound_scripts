@@ -6,12 +6,6 @@ from intabellatore_utilities import *
 from intabellatore_engine import *
 
 
-# ----------------------------------
-# -                                -
-# -         MAIN FUNCTION          -
-# -                                -
-# ----------------------------------
-
 if __name__ == "__main__":
         
     codici = ["additiva_sine.csd"]
@@ -25,7 +19,7 @@ if __name__ == "__main__":
     # in quanto il mapping strumenti-pfield succede prima della 
     # chiamata consecutiva dei pfield
 
-    csdbuffer = reperisci(codici)
+    csd_buffer = reperisci(codici)
     durata = 20
 
     p2 = [random.uniform(1.2, 3.5) for _ in range(1000)]
@@ -35,7 +29,7 @@ if __name__ == "__main__":
 
     amp = 0.25
 
-    csdbuffer=intabella(csdbuffer,
+    csd_buffer, pfields, dur_cumulativa=intabella(csd_buffer,
                     0,
                     durata,
                     bpm,
@@ -50,7 +44,7 @@ if __name__ == "__main__":
                     ]
     )
 
-    csdbuffer=intabella(csdbuffer,
+    csd_buffer,pfields, dur_cumulativa=intabella(csd_buffer,
                     0,
                     durata,
                     bpm,
@@ -69,6 +63,7 @@ if __name__ == "__main__":
 
     
 
-    csdbuffer= effetta_zakspace(csdbuffer, durata)
-    if csdbuffer != -1: exec_csound(csdbuffer, False, bpm, "battimenti_sinusoidi")
+    if csd_buffer != -1:
+        csd_buffer = effetta_zakspace(csd_buffer, dur_cumulativa)
+    if csd_buffer != -1: exec_csound(csd_buffer, False, bpm, "battimenti_sinusoidi")
 

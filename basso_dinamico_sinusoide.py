@@ -5,33 +5,21 @@ from intabellatore_utilities import *
 from intabellatore_engine import *
 
 
-
-# ----------------------------------
-# -                                -
-# -         MAIN FUNCTION          -
-# -                                -
-# ----------------------------------
-
 if __name__ == "__main__":
-    
-    #RICORDATI PER GLI STRUMENTI STRING DEVI USARE
-    #GLI ESCAPE CHARACTER INSIEME ALLE VIRGOLETTE \" \"
-    
+        
     codici = ["additiva_sine.csd"]
     bpm = 60
 
     random.seed()
 
-    #liste
-
     #instr è l'unica cosa che non può usare lambda.
     # in quanto il mapping strumenti-pfield succede prima della 
     # chiamata consecutiva dei pfield
 
-    csdbuffer = reperisci(codici)
+    csd_buffer = reperisci(codici)
     durata = 20
     
-    csdbuffer=intabella(csdbuffer,
+    csd_buffer, pfields, dur_cumulativa=intabella(csd_buffer,
                     0,
                     durata,
                     bpm,
@@ -46,7 +34,7 @@ if __name__ == "__main__":
                     ]
     )
     
-
-    print(csdbuffer)
-    exec_csound(csdbuffer, False, bpm, "basso_dinamico_sinusoide")
+    if csd_buffer != -1:
+        csd_buffer = effetta_zakspace(csd_buffer, dur_cumulativa)
+    if csd_buffer!=-1: exec_csound(csd_buffer, False, bpm, "basso_dinamico_sinusoide")
 
